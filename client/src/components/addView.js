@@ -7,10 +7,39 @@ class AddView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: "",
+      author: "",
+      year: "",
+      country: "",
+      summary: "",
+      genre: "",
+      cover:""
     };
   }
 
- 
+  handleInputChange(event) {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    this.setState({
+      [name]: value
+    }); 
+  }
+
+
+  handleSubmit() {
+    this.props.addBook(
+      {
+       title: this.state.title,
+       author: this.state.author,
+       year: this.state.year,
+       country: this.state.country,
+       summary: this.state.summary,
+       genre: this.state.genre,
+       cover: this.state.covert
+      });
+  }
+
 
   render() {
     return (
@@ -63,7 +92,7 @@ class AddView extends React.Component {
             <br></br>
 
           </form>
-          <button className="new-book-submit" onClick={() => this.handleSubmit()}>Submit</button>
+          <button className="new-book-submit" onClick={() => this.handleSubmit()}>Add New Book</button>
         </div>
       </div>
       </div>
