@@ -10,6 +10,17 @@ function getItems(req, res) {
     .catch(err => res.status(500).send(err));
 }
 
+// Get title: 
+// 1 - put this route before the '/' route, otherwise the router wont arrive here
+// 2 - enclose the argument with '', because it is a string
+router.get("/title", function(req, res, next) {
+  db(`SELECT * FROM books WHERE title = '${req.body.title}';`)
+    .then(results => {
+      res.send(results.data);
+    })
+    .catch(err => res.status(500).send(err));
+});
+
 router.get("/", function(req, res, next) {
   return getItems(req, res);
 });
@@ -22,15 +33,6 @@ router.get("/:id", function(req, res, next) {
     .catch(err => res.status(500).send(err));
 });
 
-router.get("/author", function(req, res, next) {
-  // db("SELECT title FROM books;")
-  //   .then(results => {
-  //     res.send(results.data);
-  //   })
-  //   .catch(err => res.status(500).send(err));
-  console.log("test");
-  return getItems(req, res);
-});
 
 router.delete("/:id", function(req, res, next) {
   db(`DELETE FROM books WHERE id = ${req.params.id};`)
