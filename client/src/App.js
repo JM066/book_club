@@ -23,6 +23,24 @@ export default class App extends Component {
       });
   };
 
+  renderLibrary() {
+  return this.state.books.map((books,id) => {
+    return(
+      <li key={id} className="book-list">
+        <span onClick ={() => this.getBookclub(books.id)}>
+          <div className="book-cover-container">
+          <img src={books.cover} alt={books.title} className="book-cover"/>                    
+          </div>
+          <h4>{books.title}</h4>
+          <p>{books.author}</p>
+          <br></br>
+          <br></br>
+        </span>
+      </li>
+    )
+  })}
+
+
   render() {
     return (
       <div className="App">
@@ -32,30 +50,12 @@ export default class App extends Component {
           <img />
           <h3></h3>
           <p></p>
-
         </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+        
         <ul>
-          {this.state.books.map((books,id) => {
-            return(
-              <li key={id} className="book-list">
-                <span onClick ={() => this.getBookclub(books.id)}>
-                  <div className="book-cover-container">
-                  <img src={books.cover} alt={books.title} className="book-cover"/>                    
-                  </div>
-                  <h4>{books.title}</h4>
-                  <p>{books.author}</p>
-                  <br></br>
-                  <br></br>
-                </span>
-              </li>
-            );
-          })}
-
-
+          <div className="all-books">
+            {this.renderLibrary()}
+          </div>
         </ul>
       </div>
     );
