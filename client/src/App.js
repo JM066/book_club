@@ -1,51 +1,63 @@
-import React from 'react';
-import AddView from "./components/addView";
-import BookView from "./components/bookView";
+import React, { Component } from 'react'
+//import AddView from "./components/addView";
+//import BookView from "./components/bookView";
 import './App.css';
 
-class App extends React.Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      addView: true, 
+      books:[]
     };
   }
 
-  changeUser(isAdmin) {
-    this.setState({ addView: isAdmin });
+  componentDidMount() {
+    this.getBookclub();
   }
 
-  addBook(newBook) {
-    this.setState({
-      books: [...this.state.books, newBook]
-    });
-  }
-
+  getBookclub = () => {
+    fetch(`/books`)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({ books: response });
+      });
+  };
 
   render() {
     return (
-      <div>
-      <div className="app-main-div">
-        <div className="nav-button">
-          <button onClick={() => this.changeUser(true)} 
-          className={this.state.addView ? "nav-button-clicked" : "nav-button-unclicked"}>
-          Add New Book
-          </button>
-          <button onClick={() => this.changeUser(false)} 
-          className={!this.state.addView ? "nav-button-clicked" : "nav-button-unclicked"}>
-          My Library
-          </button>
+      <div className="App">
+        <h1>My library</h1>
+        <div>
+          <img className="banner" src="https://i.insider.com/5660556add0895131c8b47f0?width=1100&format=jpeg&auto=webp"/>
+          <img />
+          <h3></h3>
+          <p></p>
 
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <ul>
+          {this.state.books.map((books,id) => {
+            return(
+              <li key={id} className="book-list">
+                <span onClick ={() => this.getBookclub(books.id)}>
+                  <div className="book-cover-container">
+                  <img src={books.cover} alt={books.title} className="book-cover"/>                    
+                  </div>
+                  <h4>{books.title}</h4>
+                  <p>{books.author}</p>
+                  <br></br>
+                  <br></br>
+                </span>
+              </li>
+            );
+          })}
 
-        {this.state.addView ?
-        <AddView addBook={newBook => this.addBook(newBook)} /> :
-        <BookView books = {this.state.books}/>}
 
-      </div>
+        </ul>
       </div>
     );
   }
 }
-
-export default App;

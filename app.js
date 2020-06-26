@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", function (req, res, next) {
   res.send("Welcome to the backend of your app");
 });
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/books', booksRouter);
 
 // catch 404 and forward to error handler

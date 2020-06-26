@@ -63,7 +63,11 @@ router.get("/cover", function(req, res, next) {
 
 
 router.get("/", function(req, res, next) {
-  return getItems(req, res);
+  db("SELECT * FROM books;")
+  .then(results => {
+    res.send(results.data);
+  })
+  .catch(err => res.status(500).send(err));
 });
 
 router.get("/:id", function(req, res, next) {

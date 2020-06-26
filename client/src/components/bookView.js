@@ -7,43 +7,34 @@ class BookView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books:[]
-    };
-  }
+    }
+  };
 
-  componentDidMount() {
-    this.getBookList();
-  }
 
-  getBookList = () => {
-    fetch(`*/title`)
-    .then(response => response.json())
-    .then(response => {
-      this.setState({books: response})
-    })
-  }
+
+handleClick(books) {
+  this.setState({
+    title: books.title,
+    author: books.author,
+    year: books.year,      
+    country: books.country,
+    summary: books.summary,
+    genre: books.genre,
+    cover: books.cover,
+  })
+}
 
 
   render() {
-    return (
+    return <div>
       <div>
-        <h1>My library</h1>
-        <ul>
-          {this.state.books.map((books,id) => {
-            return(
-              <li key={id}>
-                <span onClick ={() => this.getBookList(books.id)}>
-                  {books.title}
-                </span>
-              </li>
-            );
-          })};
-
-
-        </ul>
+        <img src = {this.state.cover} alt = {this.state.title}/>
+        <h3>{this.state.title}</h3>
+        <p>{this.state.summary}</p>
       </div>
-    );
+      </div>;
   }
 }
+
 
 export default BookView;
