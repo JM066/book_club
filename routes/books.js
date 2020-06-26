@@ -37,30 +37,21 @@ router.get("/country", function(req, res, next) {
     .catch(err => res.status(500).send(err));
 });
 
-router.get("/year", function(req, res, next) {
-  db(`SELECT * FROM books WHERE year = '${req.body.year}';`)
+router.get("/year/:year", function(req, res, next) {
+  db(`SELECT * FROM books WHERE year = '${req.params.year}';`)
     .then(results => {
       res.send(results.data);
     })
     .catch(err => res.status(500).send(err));
 });
 
-router.get("/genre", function(req, res, next) {
-  db(`SELECT * FROM books WHERE genre = '${req.body.genre}';`)
+router.get("/genre/:genre", function(req, res, next) {
+  db(`SELECT * FROM books WHERE genre = '${req.params.genre}';`)
     .then(results => {
       res.send(results.data);
     })
     .catch(err => res.status(500).send(err));
 });
-
-router.get("/cover", function(req, res, next) {
-  db(`SELECT * FROM books WHERE cover = '${req.body.cover}';`)
-    .then(results => {
-      res.send(results.data);
-    })
-    .catch(err => res.status(500).send(err));
-});
-
 
 router.get("/", function(req, res, next) {
   db("SELECT * FROM books;")

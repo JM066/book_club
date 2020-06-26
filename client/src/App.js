@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//import AddView from "./components/addView";
+import Filter from "./components/filter";
 //import BookView from "./components/bookView";
 import './App.css';
 
@@ -40,6 +40,12 @@ export default class App extends Component {
     )
   })}
 
+  filterBook(filteredList){
+    this.setState({
+      books: filteredList
+    })
+  }
+
 
   render() {
     return (
@@ -47,10 +53,13 @@ export default class App extends Component {
         <h1>My library</h1>
         <div>
           <img className="banner" src="https://i.insider.com/5660556add0895131c8b47f0?width=1100&format=jpeg&auto=webp"/>
-          <img />
-          <h3></h3>
-          <p></p>
         </div>
+
+        <div>
+          <Filter filterBook={filteredList => this.filterBook(filteredList)}/>
+        </div>
+        <br></br>
+        <br></br>
         
         <ul>
           <div className="all-books">
