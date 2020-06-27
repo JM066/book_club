@@ -29,14 +29,6 @@ router.get("/author", function(req, res, next) {
     .catch(err => res.status(500).send(err));
 });
 
-router.get("/country", function(req, res, next) {
-  db(`SELECT * FROM books WHERE country = '${req.body.country}';`)
-    .then(results => {
-      res.send(results.data);
-    })
-    .catch(err => res.status(500).send(err));
-});
-
 router.get("/year/:year", function(req, res, next) {
   db(`SELECT * FROM books WHERE year = '${req.params.year}';`)
     .then(results => {
