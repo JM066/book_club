@@ -4,7 +4,7 @@ h1 {
 }
 
 .App-header {
-  background-color: rgb(255, 242, 245);
+  background-color: rgb(255, 229, 157);
   min-height: 50vh;
   /* display: flex; */
   /* flex-direction: column; */
@@ -28,7 +28,7 @@ li {
 }
 
 .book-cover {
-  width: 70%;
+  width: 90%;
   height: auto;
 }
 

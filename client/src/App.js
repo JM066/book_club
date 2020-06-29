@@ -25,15 +25,15 @@ export default class App extends Component {
       });
   };
 
-  getBookdetails = (id) => {
-    const data = {books : id};
-    fetch(`/books/${id}`)
-      .then(response => response.json())
-      .then(response => {
-        this.setState({ 
-          showBook: response });
-      });
-  };
+  // getBookdetails = (id) => {
+  //   const data = {books : id};
+  //   fetch(`/books/${id}`)
+  //     .then(response => response.json())
+  //     .then(response => {
+  //       this.setState({ 
+  //         showBook: response });
+  //     });
+  // };
 
   handleClick(e){
     for (let i = 0 ; i < this.state.books.length ; i++) {
@@ -78,9 +78,11 @@ export default class App extends Component {
           <br/>
           <Slider />
         </div>
+        <br/>
         <div>
           <Filter filterBook={filteredList => this.filterBook(filteredList)}/>
         </div>
+        <br/>
         <ul>
           <div className="all-books">
             {this.renderLibrary()}
