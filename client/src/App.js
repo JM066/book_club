@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Filter from "./components/filter"
-// import MySlider from "./components/slider"
-import Modal from "./components/modal"
+import MySlider from "./components/myslider"
+// import Modal from "./components/modal"
 import './App.css';
 
 export default class App extends Component {
@@ -9,7 +9,8 @@ export default class App extends Component {
     super(props);
     this.state = {
       books:[],
-      showBook: []
+      showBook: [],
+      showPopup: false
     };
   }
 
@@ -36,6 +37,12 @@ export default class App extends Component {
     });           
   }
 
+  togglePopup() {  
+    this.setState({  
+         showPopup: !this.state.showPopup  
+    });  
+     }  
+
   renderLibrary() {
   return this.state.books.map((books,id) => {
     return(
@@ -47,14 +54,23 @@ export default class App extends Component {
           </div>
           <div className={this.state.showBook[books.id-1] ? "bookDetails" : "bookhidden"}>
             <br/>
+            <div className="book-show">
+            <div className="book-show-inner">
             <div className="cover-book-show">
-            <h5>{books.title}</h5>
+            <h3>{books.title}</h3>
             </div>
             <div className="author-book-show">
             <h6>{books.author}</h6>
             </div>
             <div className="summary-book-show">
             <p>{books.summary}</p>
+            </div>
+            <div className="cover-book-show">
+            <img src={books.cover} alt={books.title} width="150" height="200" />
+            </div>
+            <br/><br/><br/>
+            <button onClick={this.props.closePopup}> x </button>  
+            </div>
             </div>
           </div>
         </span>
@@ -69,13 +85,15 @@ export default class App extends Component {
     })
   }
 
+  
+
   render() {
     return (
       <div>
         <h1>London Book Club</h1>
         <div className="App-header">
           <br/>
-          {/* <MySlider /> */}
+          <MySlider />
         </div>
         <br/>
         <div>
@@ -86,7 +104,6 @@ export default class App extends Component {
           <div className="all-books">
             {this.renderLibrary()}
           </div>
-          <Modal />
         </ul>
       </div>
     );
