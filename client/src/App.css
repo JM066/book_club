@@ -11,13 +11,13 @@ h1 {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 
  ul {
   list-style-type: none;
-  margin: 0 auto;
+  margin: 5 auto;
   text-align: center;
   columns: 1;
 }
@@ -33,7 +33,7 @@ li {
 }
 
 .book-cover:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 
@@ -41,6 +41,10 @@ li {
   visibility: visible;
   height: 300px;
   width: 200px;
+}
+
+.book-show{
+  
 }
 .bookhidden {
   visibility: hidden;

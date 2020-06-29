@@ -17,6 +17,9 @@
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
-    "pure-react-carousel": "^1.27.1"
+    "pure-react-carousel": "^1.27.1",
+    "react-responsive-carousel": "^3.2.9",
+    "react-slick": "^0.26.1",
+    "slick-carousel": "^1.8.1"
   }
 }

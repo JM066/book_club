@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Filter from "./components/filter"
-import Slider from "./components/slider"
+// import MySlider from "./components/slider"
 //import Overlay from "./components/overlay"
 import './App.css';
 
@@ -25,16 +25,6 @@ export default class App extends Component {
       });
   };
 
-  // getBookdetails = (id) => {
-  //   const data = {books : id};
-  //   fetch(`/books/${id}`)
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       this.setState({ 
-  //         showBook: response });
-  //     });
-  // };
-
   handleClick(e){
     for (let i = 0 ; i < this.state.books.length ; i++) {
       this.state.showBook[i] = false;
@@ -51,12 +41,22 @@ export default class App extends Component {
     return(
       <li key={id} className="book-list">
         <span onClick ={() => this.getBookclub(books.id)}>
-          <div className="book-cover">
-          <img onClick={(e) => this.handleClick(e)} name={books.id} src={books.cover} alt={books.title} className="book-cover"/>              
+          <div>
+          <img onClick={(e) => this.handleClick(e)} name={books.id} src={books.cover} alt={books.title}/>              
           </div>
           <div className={this.state.showBook[books.id-1] ? "bookDetails" : "bookhidden"}>
             <br/>
+            <div className="book-show">
+            <div className="cover-book-show">
             <h5>{books.title}</h5>
+            </div>
+            <div className="author-book-show">
+            <h6>{books.author}</h6>
+            </div>
+            <div className="summary-book-show">
+            <p>{books.summary}</p>
+            </div>
+            </div>
           </div>
         </span>
       </li>
@@ -76,7 +76,7 @@ export default class App extends Component {
         <h1>London Book Club</h1>
         <div className="App-header">
           <br/>
-          <Slider />
+          {/* <MySlider /> */}
         </div>
         <br/>
         <div>
