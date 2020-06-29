@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Filter from "./components/filter"
+import Slider from "./components/slider"
 //import Overlay from "./components/overlay"
 import './App.css';
 
@@ -8,7 +9,6 @@ export default class App extends Component {
     super(props);
     this.state = {
       books:[],
-      bookdetails: false,
       showBook: []
     };
   }
@@ -36,9 +36,13 @@ export default class App extends Component {
   };
 
   handleClick(e){
-    // e.preventdefault();
+    for (let i = 0 ; i < this.state.books.length ; i++) {
+      this.state.showBook[i] = false;
+    }
+    let bookShow = [...this.state.showBook];
+    bookShow[e.target.name-1] = true;
     this.setState({
-      bookdetails: !this.state.bookdetails
+      showBook: bookShow
     });           
   }
 
@@ -48,67 +52,16 @@ export default class App extends Component {
       <li key={id} className="book-list">
         <span onClick ={() => this.getBookclub(books.id)}>
           <div className="book-cover">
-          <img onClick={(e) => this.handleClick()} src={books.cover} alt={books.title} className="book-cover"/>                    
+          <img onClick={(e) => this.handleClick(e)} name={books.id} src={books.cover} alt={books.title} className="book-cover"/>              
           </div>
-          <div className={this.state.bookdetails ? "bookdetails" : "bookhidden"}>
-
-
-
-
-
-          {/* <h4>{books.title}</h4>
-          <h5>{books.author}</h5>
-          <p>{books.summary}</p> */}
+          <div className={this.state.showBook[books.id-1] ? "bookDetails" : "bookhidden"}>
+            <br/>
+            <h5>{books.title}</h5>
           </div>
-          <br></br>
-          <br></br>
         </span>
       </li>
     )
   })}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 
   filterBook(filteredList){
@@ -121,6 +74,10 @@ export default class App extends Component {
     return (
       <div>
         <h1>London Book Club</h1>
+        <div className="App-header">
+          <br/>
+          <Slider />
+        </div>
         <div>
           <Filter filterBook={filteredList => this.filterBook(filteredList)}/>
         </div>
