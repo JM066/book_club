@@ -38,18 +38,46 @@ li {
 
 
 .bookdetails {
-  visibility: visible;
+  visibility: initial;
   height: 300px;
   width: 200px;
-}
-
-.book-show{
   
 }
+
+
+
+
+
+
 .bookhidden {
   visibility: hidden;
   display: none;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Filter from "./components/filter"
 // import MySlider from "./components/slider"
-//import Overlay from "./components/overlay"
+import Modal from "./components/modal"
 import './App.css';
 
 export default class App extends Component {
@@ -41,12 +41,12 @@ export default class App extends Component {
     return(
       <li key={id} className="book-list">
         <span onClick ={() => this.getBookclub(books.id)}>
+          <br/>
           <div>
-          <img onClick={(e) => this.handleClick(e)} name={books.id} src={books.cover} alt={books.title}/>              
+          <img onClick={(e) => this.handleClick(e)} name={books.id} src={books.cover} alt={books.title} className="book-cover"/>              
           </div>
           <div className={this.state.showBook[books.id-1] ? "bookDetails" : "bookhidden"}>
             <br/>
-            <div className="book-show">
             <div className="cover-book-show">
             <h5>{books.title}</h5>
             </div>
@@ -55,7 +55,6 @@ export default class App extends Component {
             </div>
             <div className="summary-book-show">
             <p>{books.summary}</p>
-            </div>
             </div>
           </div>
         </span>
@@ -87,6 +86,7 @@ export default class App extends Component {
           <div className="all-books">
             {this.renderLibrary()}
           </div>
+          <Modal />
         </ul>
       </div>
     );
