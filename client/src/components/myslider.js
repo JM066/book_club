@@ -13,7 +13,7 @@ export default class myslider extends Component {
       return (
         <CarouselProvider
           naturalSlideWidth={100}
-          naturalSlideHeight={30}
+          naturalSlideHeight={25}
           totalSlides={3}
         >
           <Slider>
@@ -21,8 +21,8 @@ export default class myslider extends Component {
             <Slide index={1}><img src="https://m.media-amazon.com/images/I/51GAFkml+FL.jpg"/></Slide>
             <Slide index={2}><img src="https://images-na.ssl-images-amazon.com/images/I/51e2-LIM3aL._SX324_BO1,204,203,200_.jpg"/></Slide>
           </Slider>
-          <ButtonBack>Back</ButtonBack>
-          <ButtonNext>Next</ButtonNext>
+          <ButtonBack className="button-back">Back</ButtonBack>
+          <ButtonNext className="button-next">Next</ButtonNext>
         </CarouselProvider>
       );
     }
