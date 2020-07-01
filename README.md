@@ -5,8 +5,7 @@
 Books are amazing but they also are expensive so during lockdown, I have been exchanging books with friends by post.
 The goal of this project is to publish my real life library online on a map to allow people around me to borrow my books.
 
-
-### Status
+## Status
 
 DONE
 DB with books title, author, country, year of publication, summary & cover
@@ -21,7 +20,7 @@ Box appearring with books details when clicking on a book cover within the list
 
 CSS is very simple as I usually like very simple clean pages
 
-#### Extensions Wishlist
+### Extensions Wishlist
 
 Ideally a map so people can see available books location
 
@@ -34,3 +33,25 @@ Create an input page (like the admin/user in the portfolio?) or form at the bott
 Create a status in the DB to show if a book is available to borrow or not + render it in the detail box
 
 Any CSS you like, the box for example is not nice when scrolling down
+
+### Technologies
+
+React.js
+Node.js
+Express
+mySQL
+Datagrid
+
+### Setup
+
+Back end
+cd codeop/mvp_book_club
+cd npm install
+cd npm start
+
+Front end
+cd codeop/mvp_book_club
+cd client
+cd npm start
+
+
