@@ -14,7 +14,7 @@ export default class Filter extends Component {
     fetch(`/books/genre/${genredata}`)
       .then(response => response.json())
       .then(data => {
-        this.props.filterBook(data);
+        this.props.filteredList(data);
       });
   };
 

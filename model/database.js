@@ -22,7 +22,7 @@ con.connect(function(err) {
   "DROP TABLE if exists books; CREATE TABLE books(id int auto_increment primary key, title text null, author text null, year int null, country text null, summary text null, genre text null, cover text null);";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log("Table creation `items` was successful!");
+    console.log("Table creation `books` was successful!");
 
     console.log("Closing...");
     });
@@ -83,7 +83,7 @@ con.connect(function(err) {
 
     console.log("Closing...");
   });
-  sql = "INSERT INTO bookclub.books (id, title, author, year, country, summary, genre, cover) VALUES (9, 'My Year of Rest and Relaxation', 'Ottessa Moshfegh', 2019, 'United-States', 'It's the year 2000 in a city aglitter with wealth and possibility; what could be so terribly wrong? Our narrator has many of the advantages of life: Young, thin, pretty, a recent Columbia graduate, she lives in an apartment on the Upper East Side of Manhattan paid for, like everything else, by her inheritance. But there is a vacuum at the heart of things, and it isn't just the loss of her parents in college, or the way her Wall Street boyfriend treats her, or her sadomasochistic relationship with her alleged best friend.', 'fiction', 'https://m.media-amazon.com/images/I/51GAFkml+FL.jpg');";
+  sql = "INSERT INTO bookclub.books (id, title, author, year, country, summary, genre, cover) VALUES (9, 'My Year of Rest and Relaxation', 'Ottessa Moshfegh', 2019, 'United-States', 'It''s the year 2000 in a city aglitter with wealth and possibility; what could be so terribly wrong? Our narrator has many of the advantages of life: Young, thin, pretty, a recent Columbia graduate, she lives in an apartment on the Upper East Side of Manhattan paid for, like everything else, by her inheritance. But there is a vacuum at the heart of things, and it isn''t just the loss of her parents in college, or the way her Wall Street boyfriend treats her, or her sadomasochistic relationship with her alleged best friend.', 'fiction', 'https://m.media-amazon.com/images/I/51GAFkml+FL.jpg');";
       con.query(sql, function (err, result) {
       if (err) throw err;
       console.log("Table creation `items` was successful!");

@@ -3,6 +3,10 @@ import Filter from "./components/filter"
 import MySlider from "./components/myslider"
 // import Modal from "./components/modal"
 import './App.css';
+import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
+import Maps from "./components/Maps"
+// const opencage = require('opencage-api-client');
+
 
 export default class App extends Component {
   constructor(props) {
@@ -11,6 +15,10 @@ export default class App extends Component {
       books:[],
       showBook: [],
       showPopup: false
+      
+      // lat: 40.4366009,
+      // lon: -4.2400222,
+      // zoom: 5
     };
   }
 
@@ -22,6 +30,7 @@ export default class App extends Component {
     fetch(`/books`)
       .then(response => response.json())
       .then(response => {
+        console.log(response)
         this.setState({ books: response });
       });
   };
@@ -69,7 +78,7 @@ export default class App extends Component {
             <img src={books.cover} alt={books.title} width="150" height="200" />
             </div>
             <br/><br/><br/>
-            <button onClick={this.props.closePopup}> x </button>  
+            <button onClick={this.state.closePopup}> x </button>  
             </div>
             </div>
           </div>
@@ -84,9 +93,8 @@ export default class App extends Component {
       books: filteredList
     })
   }
-
+ 
   
-
   render() {
     return (
       <div>
@@ -105,6 +113,7 @@ export default class App extends Component {
             {this.renderLibrary()}
           </div>
         </ul>
+        <Maps bookList={this.state.books}/>
       </div>
     );
   }

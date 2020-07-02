@@ -61,6 +61,21 @@ router.get("/:id", function(req, res, next) {
     .catch(err => res.status(500).send(err));
 });
 
+router.put("/:id", (req, res) => {
+  db(`UPDATE books SET location ='${req.body.location}' WHERE id=${req.params.id};`)
+    .then(results => {
+      if (results.error) {
+        res.status(404).send({ error: results.error });
+      } else {
+        db("SELECT * FROM books ORDER BY id ASC;")
+          .then(results => {
+            res.send(results.data);
+          })
+          .catch(err => res.status(500).send(err));
+      }
+    })
+    .catch(err => res.status(500).send(err));
+});
 
 router.delete("/:id", function(req, res, next) {
   db(`DELETE FROM books WHERE id = ${req.params.id};`)
