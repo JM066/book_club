@@ -34,7 +34,8 @@ export default class App extends Component {
         this.setState({ books: response });
       });
   };
-
+  
+  
   handleClick(e){
     for (let i = 0 ; i < this.state.books.length ; i++) {
       this.state.showBook[i] = false;
@@ -52,11 +53,15 @@ export default class App extends Component {
     });  
      }  
 
-  renderLibrary() {
+  filterBook = (filteredList) =>{
+      this.setState({
+        books: filteredList
+      })
+    }
+  renderLibrary = () => {
   return this.state.books.map((books,id) => {
     return(
       <li key={id} className="book-list">
-        <span onClick ={() => this.getBookclub(books.id)}>
           <br/>
           <div>
           <img onClick={(e) => this.handleClick(e)} name={books.id} src={books.cover} alt={books.title} className="book-cover"/>              
@@ -82,18 +87,11 @@ export default class App extends Component {
             </div>
             </div>
           </div>
-        </span>
       </li>
     )
   })}
   
 
-  filterBook(filteredList){
-    this.setState({
-      books: filteredList
-    })
-  }
- 
   
   render() {
     return (
@@ -113,7 +111,7 @@ export default class App extends Component {
             {this.renderLibrary()}
           </div>
         </ul>
-        <Maps bookList={this.state.books}/>
+        <Maps bookList={this.state.books}  />
       </div>
     );
   }

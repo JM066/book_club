@@ -9,17 +9,19 @@ export default class Filter extends Component {
     };
   }
 
-  getBookclub = (genredata) => {
-    const data = {genre: genredata};
+  getFiltered = (genredata) => {
+    // const data = {genre: genredata};
     fetch(`/books/genre/${genredata}`)
       .then(response => response.json())
       .then(data => {
-        this.props.filteredList(data);
+        console.log(data);
+        this.props.filterBook(data);
       });
   };
 
-  handleDropdown(e) {
-    this.getBookclub(e.target.value);
+  handleDropdown = (e) => {
+    console.log(e.target.value)
+    this.getFiltered(e.target.value);
   }
 
 
