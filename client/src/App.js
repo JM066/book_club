@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import Filter from "./components/filter"
 import MySlider from "./components/myslider"
-// import Modal from "./components/modal"
 import './App.css';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import Maps from "./components/Maps"
-// const opencage = require('opencage-api-client');
 
 
 export default class App extends Component {
@@ -14,27 +12,52 @@ export default class App extends Component {
     this.state = {
       books:[],
       showBook: [],
-      showPopup: false
-      
-      // lat: 40.4366009,
-      // lon: -4.2400222,
-      // zoom: 5
+      showPopup: false,
     };
   }
 
   componentDidMount() {
-    this.getBookclub();
+    this.getBookclub()
+    // this.addLocation()
   }
 
-  getBookclub = () => {
+// addLocation = () => {
+//   {this.state.books.map((book, index) => {
+//     opencage.geocode({ q: book.location, key: OCD_API_KEY })
+//     .then(data => {
+//     console.log(data);
+//     if (data.results.length > 0){
+//       console.log("Found: " + data.results[0].formatted);
+//       const latlng = data.results[0].geometry;
+//       const {markers} = this.state
+//       markers.push(latlng)
+//       console.log(latlng);
+//       this.setState({markers})
+//       // let mapInst =  this.refs.map.leafletElement;
+//       // mapInst.flyTo(latlng, 12);
+//   } else alert("No results found!!");
+//   })  
+//   .catch(error => {
+//     console.log('error', error.message);
+//   })
+// })
+// }
+getBookclub = () => {
     fetch(`/books`)
       .then(response => response.json())
       .then(response => {
-        console.log(response)
+        
         this.setState({ books: response });
       });
-  };
-  
+      
+  }
+//   updateMarkers = () => {
+//     while (this.state.books)
+//   this.state.books.map((book, index) => {
+//     while(book )
+//     this.addLocation(book)
+//   })
+// }
   
   handleClick(e){
     for (let i = 0 ; i < this.state.books.length ; i++) {
@@ -111,8 +134,8 @@ export default class App extends Component {
             {this.renderLibrary()}
           </div>
         </ul>
-        <Maps bookList={this.state.books}  />
-      </div>
+          <Maps bookList={this.state.books} />
+        </div>
     );
   }
 }
