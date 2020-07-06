@@ -6,7 +6,7 @@ export default class Maps extends Component {
   constructor(props) {
       super(props);
       this.state = {
-      
+        
       }
 }
 
@@ -18,14 +18,14 @@ render() {
                   attribution='<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'/>
      
           {this.props.bookList.map((marker, index) => 
-            <Marker key={index} position={marker.location}>
-                   <Popup> 
-                      {marker.title}
-                      <img width="150" />
-                    </Popup>
-            </Marker>           
-            )  
-          }
+            <Marker key={index} position={marker}>
+              <Popup key={index}> 
+                     Title goes here
+                <img width="150" />
+              </Popup>
+            </Marker>        
+            )
+            }
       </Map>
       </div>
         )

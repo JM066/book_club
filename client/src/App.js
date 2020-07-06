@@ -15,11 +15,8 @@ export default class App extends Component {
       books:[],
       showBook: [],
       showPopup: false,
-      markers: 
-        [
-          { location: [{lat: 36.7213028, lng: -4.4216366}],
-            name: "The Testaments" }
-        ]
+      markers: [],
+      titles: []
     };
   }
 
@@ -45,19 +42,17 @@ export default class App extends Component {
       console.log(data);
       if (data.results.length > 0){
         console.log("Found: " + data.results[0].formatted);
+        // const formatted = data.results[0].formatted;
         const latlng = data.results[0].geometry;
-        for(let i = 0; i < this.state.markers.length; i++) {
-          const {location} = this.state.markers[i].location;
-          location.push(latlng);
+        const {markers} = this.state
+        markers.push(latlng)
+        console.log(latlng);
           this.setState({
-            markers: {
-              location: location,
-              name: book.title 
-            }
-          })
-        }
-        // let mapInst =  this.refs.map.leafletElement;
-        // mapInst.flyTo(latlng, 12);
+            markers: markers
+          }) 
+
+        let mapInst =  this.refs.map.leafletElement;
+        mapInst.flyTo(latlng, 12);
     } else alert("No results found!!");
     })  
     .catch(error => {
@@ -123,7 +118,6 @@ export default class App extends Component {
 
   
   render() {
-    console.log(this.state.markers)
     return (
       <div>
         <h1>London Book Club</h1>
@@ -141,7 +135,7 @@ export default class App extends Component {
             {this.renderLibrary()}
           </div>
         </ul>
-          <Maps bookList={this.state.markers} />
+          <Maps bookList={this.state.markers}/>
         </div>
     );
   }
