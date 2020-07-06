@@ -4,6 +4,8 @@ import MySlider from "./components/myslider"
 import './App.css';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import Maps from "./components/Maps"
+const opencage = require('opencage-api-client');
+const OCD_API_KEY = process.env.REACT_APP_OCD_API_KEY;
 
 
 export default class App extends Component {
@@ -13,52 +15,56 @@ export default class App extends Component {
       books:[],
       showBook: [],
       showPopup: false,
+      markers: 
+        [
+          { location: [{lat: 36.7213028, lng: -4.4216366}],
+            name: "The Testaments" }
+        ]
     };
   }
 
   componentDidMount() {
+    console.log("arrive this?");
     this.getBookclub()
-    // this.addLocation()
   }
 
-// addLocation = () => {
-//   {this.state.books.map((book, index) => {
-//     opencage.geocode({ q: book.location, key: OCD_API_KEY })
-//     .then(data => {
-//     console.log(data);
-//     if (data.results.length > 0){
-//       console.log("Found: " + data.results[0].formatted);
-//       const latlng = data.results[0].geometry;
-//       const {markers} = this.state
-//       markers.push(latlng)
-//       console.log(latlng);
-//       this.setState({markers})
-//       // let mapInst =  this.refs.map.leafletElement;
-//       // mapInst.flyTo(latlng, 12);
-//   } else alert("No results found!!");
-//   })  
-//   .catch(error => {
-//     console.log('error', error.message);
-//   })
-// })
-// }
-getBookclub = () => {
+  getBookclub = () => {
     fetch(`/books`)
       .then(response => response.json())
       .then(response => {
-        
         this.setState({ books: response });
-      });
-      
+        for(let i = 0; i < this.state.books.length; i++) {
+          this.addLocation(this.state.books[i]);
+        }
+      });   
   }
-//   updateMarkers = () => {
-//     while (this.state.books)
-//   this.state.books.map((book, index) => {
-//     while(book )
-//     this.addLocation(book)
-//   })
-// }
   
+  addLocation = (book) => {
+      opencage.geocode({ q: book.location, key: OCD_API_KEY })
+      .then(data => {
+      console.log(data);
+      if (data.results.length > 0){
+        console.log("Found: " + data.results[0].formatted);
+        const latlng = data.results[0].geometry;
+        for(let i = 0; i < this.state.markers.length; i++) {
+          const {location} = this.state.markers[i].location;
+          location.push(latlng);
+          this.setState({
+            markers: {
+              location: location,
+              name: book.title 
+            }
+          })
+        }
+        // let mapInst =  this.refs.map.leafletElement;
+        // mapInst.flyTo(latlng, 12);
+    } else alert("No results found!!");
+    })  
+    .catch(error => {
+      console.log('error', error.message);
+    })
+  }
+
   handleClick(e){
     for (let i = 0 ; i < this.state.books.length ; i++) {
       this.state.showBook[i] = false;
@@ -117,6 +123,7 @@ getBookclub = () => {
 
   
   render() {
+    console.log(this.state.markers)
     return (
       <div>
         <h1>London Book Club</h1>
@@ -134,7 +141,7 @@ getBookclub = () => {
             {this.renderLibrary()}
           </div>
         </ul>
-          <Maps bookList={this.state.books} />
+          <Maps bookList={this.state.markers} />
         </div>
     );
   }
