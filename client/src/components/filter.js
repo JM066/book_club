@@ -14,19 +14,13 @@ export default class Filter extends Component {
     fetch(`/books/genre/${genredata}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         this.props.filterBook(data);
+        // this.props.addLocation(data);
       });
   };
   
   handleDropdown = (e) => {
     this.getFiltered(e.target.value);
-    
-  //   this.props.bookList.map((book, id) => {
-  //     if (e.target.value === book.genre) {
-  //       return this.props.addLocation(book.location);
-  //     }
-  // })
   
 }
 

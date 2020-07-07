@@ -80,12 +80,16 @@ export default class App extends Component {
      }  
 
   filterBook = (filteredList) =>{
-    for(let i = 0; i < this.state.books.length; i++) {
       this.setState(
-        {books: filteredList}, function() {
-          this.addLocation(this.state.books[i])
-        })
-    }
+        {books: filteredList,
+         markers: []
+        }, function() {
+          for(let i = 0; i < this.state.books.length; i++) {
+            this.addLocation(this.state.books[i]);
+           }
+        }
+      )
+      console.log(this.state.markers)
     }
  
   renderLibrary = () => {
@@ -133,7 +137,7 @@ export default class App extends Component {
         </div>
         <br/>
         <div>
-          <Filter bookList={this.state.books} filterBook={filteredList => this.filterBook(filteredList)} addLocation={filteredMap => this.addLocation(filteredMap)}/>
+          <Filter filterBook={filteredList => this.filterBook(filteredList)} addLocation={book => this.addLocation(book)}/>
         </div>
         <br/>
         <ul>
