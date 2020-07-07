@@ -18,9 +18,9 @@ render() {
                   attribution='<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'/>
      
           {this.props.bookList.map((marker, index) => 
-            <Marker key={index} position={marker}>
+            <Marker key={index} position={marker.location}>
               <Popup key={index}> 
-                     Title goes here
+                     {marker.name}
                 <img width="150" />
               </Popup>
             </Marker>        

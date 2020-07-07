@@ -15,7 +15,7 @@ export default class App extends Component {
       books:[],
       showBook: [],
       showPopup: false,
-      markers: [],
+      markers: []
     };
   }
 
@@ -30,13 +30,13 @@ export default class App extends Component {
       .then(response => {
         this.setState({ books: response });
         for(let i = 0; i < this.state.books.length; i++) {
-         this.addLocation(this.state.books[i].location);
+         this.addLocation(this.state.books[i]);
         }
       });   
   }
   
-  addLocation = (location) => {
-      opencage.geocode({ q: location, key: OCD_API_KEY })
+  addLocation = (book) => {
+      opencage.geocode({ q: book.location, key: OCD_API_KEY })
       .then(data => {
       console.log(data);
       if (data.results.length > 0){
@@ -44,12 +44,15 @@ export default class App extends Component {
         // const formatted = data.results[0].formatted;
         const latlng = data.results[0].geometry;
         const {markers} = this.state
-        markers.push(latlng)
-        console.log(latlng);
+          let markerObject = { 
+            location: latlng,
+            name: book.title
+          };
+          markers.push(markerObject);
           this.setState({
             markers: markers
-          }) 
-
+          })
+          console.log(this.state.markers); 
         let mapInst =  this.refs.map.leafletElement;
         mapInst.flyTo(latlng, 12);
     } else alert("No results found!!");
@@ -80,7 +83,7 @@ export default class App extends Component {
     for(let i = 0; i < this.state.books.length; i++) {
       this.setState(
         {books: filteredList}, function() {
-          this.addLocation(this.state.books[i].location)
+          this.addLocation(this.state.books[i])
         })
     }
     }
