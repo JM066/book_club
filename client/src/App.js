@@ -16,7 +16,6 @@ export default class App extends Component {
       showBook: [],
       showPopup: false,
       markers: [],
-      titles: []
     };
   }
 
@@ -31,13 +30,13 @@ export default class App extends Component {
       .then(response => {
         this.setState({ books: response });
         for(let i = 0; i < this.state.books.length; i++) {
-          this.addLocation(this.state.books[i]);
+         this.addLocation(this.state.books[i].location);
         }
       });   
   }
   
-  addLocation = (book) => {
-      opencage.geocode({ q: book.location, key: OCD_API_KEY })
+  addLocation = (location) => {
+      opencage.geocode({ q: location, key: OCD_API_KEY })
       .then(data => {
       console.log(data);
       if (data.results.length > 0){
@@ -78,10 +77,14 @@ export default class App extends Component {
      }  
 
   filterBook = (filteredList) =>{
-      this.setState({
-        books: filteredList
-      })
+    for(let i = 0; i < this.state.books.length; i++) {
+      this.setState(
+        {books: filteredList}, function() {
+          this.addLocation(this.state.books[i].location)
+        })
     }
+    }
+ 
   renderLibrary = () => {
   return this.state.books.map((books,id) => {
     return(
@@ -127,7 +130,7 @@ export default class App extends Component {
         </div>
         <br/>
         <div>
-          <Filter filterBook={filteredList => this.filterBook(filteredList)}/>
+          <Filter bookList={this.state.books} filterBook={filteredList => this.filterBook(filteredList)} addLocation={filteredMap => this.addLocation(filteredMap)}/>
         </div>
         <br/>
         <ul>

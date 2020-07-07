@@ -18,12 +18,17 @@ export default class Filter extends Component {
         this.props.filterBook(data);
       });
   };
-
+  
   handleDropdown = (e) => {
-    console.log(e.target.value)
     this.getFiltered(e.target.value);
-  }
-
+    
+  //   this.props.bookList.map((book, id) => {
+  //     if (e.target.value === book.genre) {
+  //       return this.props.addLocation(book.location);
+  //     }
+  // })
+  
+}
 
   render() {
     return (
