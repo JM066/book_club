@@ -12,6 +12,7 @@
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0",
     "react-scripts": "3.4.1",
+    "serialize-javascript": "^4.0.0",
     "websocket-extensions": "^0.1.4"
   },
   "scripts": {
