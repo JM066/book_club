@@ -5,7 +5,8 @@ import './App.css';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import Maps from "./components/Maps"
 const opencage = require('opencage-api-client');
-const OCD_API_KEY = process.env.REACT_APP_OCD_API_KEY;
+const OCD_API_KEY = "de9bbf86a9fe4e93b5763f9ebc37e0f3"
+// process.env.REACT_APP_OCD_API_KEY;
 
 
 export default class App extends Component {
@@ -30,13 +31,14 @@ export default class App extends Component {
       .then(response => {
         this.setState({ books: response });
         for(let i = 0; i < this.state.books.length; i++) {
+          console.log(this.state.books[i])
          this.addLocation(this.state.books[i]);
         }
       });   
   }
   
   addLocation = (book) => {
-      opencage.geocode({ q: book.location, key: OCD_API_KEY })
+      opencage.geocode({ key: OCD_API_KEY, q: book.location })
       .then(data => {
       console.log(data);
       if (data.results.length > 0){
