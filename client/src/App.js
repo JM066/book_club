@@ -5,8 +5,7 @@ import './App.css';
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet';
 import Maps from "./components/Maps"
 const opencage = require('opencage-api-client');
-const OCD_API_KEY = "de9bbf86a9fe4e93b5763f9ebc37e0f3"
-// process.env.REACT_APP_OCD_API_KEY;
+const OCD_API_KEY = process.env.REACT_APP_OCD_API_KEY;
 
 
 export default class App extends Component {
